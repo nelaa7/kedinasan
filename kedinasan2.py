@@ -1,6 +1,10 @@
 from statistics import mean
 import pandas as pd
 import numpy as np
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
 
 formasi = pd.read_excel("1-formasi.xlsx")
 skd = pd.read_excel("2-skd.xlsx")
@@ -17,6 +21,8 @@ kedinasan = data_merge.loc[:, ['lokasi.formasi','formasi.d3st', 'pendaftar.d3st'
                                'skd.tiu', 'skd.tkp', 'skd.total', 't1.ket', 'no.ujian', 'mtk.nilai', 't2.ket']]
 
 kedinasan['lokasi.formasi'] = pd.to_numeric(kedinasan['lokasi.formasi'], errors='coerce')
+kedinasan['mtk.nilai'] = pd.to_numeric(kedinasan['mtk.nilai'], errors='coerce')
+
 
 print(kedinasan.head())
 
@@ -69,14 +75,70 @@ print("outlier kolom formasi.d4ks : ", outliers5)
 print("total outlier formasi.d4ks : ", len(outliers5))
 print()
 
-outliers6= detect_outlier(kedinasan['no.peserta'])
-print("outlier kolom no peserta : ", outliers6)
-print("total outlier no peserta : ", len(outliers6))
-print()
+# outliers6= detect_outlier(kedinasan['no.peserta'])
+# print("outlier kolom no peserta : ", outliers6)
+# print("total outlier no peserta : ", len(outliers6))
+# print()
 
-outliersskd2= detect_outlier(skd1['skd.twk'])
+outliersskd2= detect_outlier(kedinasan['skd.twk'])
 print("outlier kolom skd.twk : ", outliersskd2)
 print("total outlier skd.twk : ", len(outliersskd2))
+print()
+
+outliersskd3= detect_outlier(kedinasan['skd.tiu'])
+print("outlier kolom skd.tiu : ", outliersskd3)
+print("total outlier skd.tiu : ", len(outliersskd3))
+print()
+
+outliersskd4= detect_outlier(kedinasan['skd.tkp'])
+print("outlier kolom skd.tkp : ", outliersskd4)
+print("total outlier skd.tkp : ", len(outliersskd4))
+print()
+
+outliersskd5= detect_outlier(kedinasan['skd.total'])
+print("outlier kolom skp.total : ", outliersskd5)
+print("total outlier skp.total : ", len(outliersskd5))
+print( )
+
+outliersmtk1= detect_outlier(kedinasan['mtk.nilai'])
+print("outlier kolom mtk.nilai : ", outliersmtk1)
+print("total outlier mtk.nilai : ", len(outliersmtk1))
+print( )
+
+
+# Grouping yang dibagi menjadi dua
+print("GROUPING VARIABEL".center(100, "="))
+x=kedinasan.iloc[:,0:9].values
+y=kedinasan.iloc[:,9].values
+
+# Split data into training and testing
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.30, random_state=100)
+print("Instance variabel data training".center(75, "="))
+print(x_train)
+print("Instance kelas data training".center(75, "="))
+print(y_train)
+print("Instance variabel data testing".center(75, "="))
+print(x_test)
+print("Instance kelas data testing".center(75, "="))
+print(y_test)
+print("============================================================")
+print()
+
+
+# Pemodelan SVM
+svm_model = SVC()
+svm_model.fit(x_train, y_train)
+y_pred_svm = svm_model.predict(x_test)
+print("Hasil prediksi SVM".center(75, "="))
+print(y_pred_svm)
+print("============================================================")
+print()
+
+# Evaluasi confusion matrix dan evaluasi akurasi SVM
+print("Hasil confusion matrix SVM".center(75, "="))
+print(confusion_matrix(y_test, y_pred_svm))
+print("Hasil akurasi pemodelan SVM:", accuracy_score(y_test, y_pred_svm))
+print("============================================================")
 print()
 
 
