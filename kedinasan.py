@@ -28,7 +28,20 @@ print(mtk1.head())
 
 mtk1['mtk.nilai'] = pd.to_numeric(mtk1['mtk.nilai'], errors='coerce')
 mtk1['t2.ket'] = pd.to_numeric(mtk1['t2.ket'], errors='coerce')
-# skd1['t1.ket'] = pd.to_numeric(mtk1['t1.ket'], errors='coerce')
+skd1['t1.ket'] = pd.to_numeric(skd1['t1.ket'], errors='coerce')
+skd1['no.peserta'] = pd.to_numeric(skd1['no.peserta'], errors='coerce')
+skd1['skd.twk'] = pd.to_numeric(skd1['skd.twk'], errors='coerce')
+skd1['skd.tiu'] = pd.to_numeric(skd1['skd.tiu'], errors='coerce')
+skd1['skd.tkp'] = pd.to_numeric(skd1['skd.tkp'], errors='coerce')
+# skd1['skp.total'] = pd.to_numeric(skd1['skp.total'], errors='coerce')
+
+
+
+
+
+# variableskd = ['skd.twk', 'skd.tiu', 'skd.tkp', 'skp.total']
+
+
 
 
 
@@ -108,35 +121,35 @@ def detect_outlier(skd1):
 
 # cetak oulier skd
 
-# outliersskd1= detect_outlier(skd1['no.peserta'])
-# print("outlier kolom no peserta : ", outliersskd1)
-# print("total outlier no peserta : ", len(outliersskd1))
-# print()
+outliersskd1= detect_outlier(skd1['no.peserta'])
+print("outlier kolom no peserta : ", outliersskd1)
+print("total outlier no peserta : ", len(outliersskd1))
+print()
 
-# outliersskd2= detect_outlier(skd1['skd.twk'])
-# print("outlier kolom skd.twk : ", outliersskd2)
-# print("total outlier skd.twk : ", len(outliersskd2))
-# print()
+outliersskd2= detect_outlier(skd1['skd.twk'])
+print("outlier kolom skd.twk : ", outliersskd2)
+print("total outlier skd.twk : ", len(outliersskd2))
+print()
 
-# outliersskd3= detect_outlier(skd1['skd.tiu'])
-# print("outlier kolom skd.tiu : ", outliersskd3)
-# print("total outlier skd.tiu : ", len(outliersskd3))
-# print()
+outliersskd3= detect_outlier(skd1['skd.tiu'])
+print("outlier kolom skd.tiu : ", outliersskd3)
+print("total outlier skd.tiu : ", len(outliersskd3))
+print()
 
-# outliersskd4= detect_outlier(skd1['skd.tkp'])
-# print("outlier kolom skd.tkp : ", outliersskd4)
-# print("total outlier skd.tkp : ", len(outliersskd4))
-# print()
+outliersskd4= detect_outlier(skd1['skd.tkp'])
+print("outlier kolom skd.tkp : ", outliersskd4)
+print("total outlier skd.tkp : ", len(outliersskd4))
+print()
 
-# outliersskd5= detect_outlier(skd1['skd.total'])
-# print("outlier kolom skd.total : ", outliersskd5)
-# print("total outlier skd.total : ", len(outliersskd5))
-# print()
+outliersskd5= detect_outlier(skd1['skd.total'])
+print("outlier kolom skd.total : ", outliersskd5)
+print("total outlier skd.total : ", len(outliersskd5))
+print()
 
-# outliersskd6= detect_outlier(skd1['t1.ket'])
-# print("outlier kolom t1.ket : ", outliersskd6)
-# print("total outlier t1.ket : ", len(outliersskd6))
-# print()
+outliersskd6= detect_outlier(skd1['t1.ket'])
+print("outlier kolom t1.ket : ", outliersskd6)
+print("total outlier t1.ket : ", len(outliersskd6))
+print()
 
 # outlier mtk
 print("deteksi outlier mtk")
@@ -171,6 +184,7 @@ print("total outlier t2.ket: ", len(outliersmtk3))
 print()
 
 
+print("================================================================")
 # penanganan outlier 
 variable = ['pendaftar.d4st', 'formasi.d4ks', 'pendaftar.d4ks']
 for var in variable:
@@ -187,11 +201,33 @@ for var in variable:
 print("Data setelah penanganan outlier:")
 print(formasi) 
 
-# variableskd = ['skd.twk', 'skd.tiu', 'skd.tkp', 'skp.total']
-# for varskd in variableskd:
-#     outlier_datapoints = detect_outlier(skd1[varskd])
-#     rataskd = mean(skd1[varskd])
-#     skd1[varskd] = skd1[varskd].replace(outlier_datapoints, rataskd)
+
+print("================================================================")
+variableskd = ['skd.twk', 'skd.tiu', 'skd.tkp', 'skp.total']
+
+
+
+for var in variableskd:
+    outlier_datapoints = detect_outlier(variableskd[var])
+    print("Outlier ", var, " = ", outlier_datapoints)
+
+for var in variableskd:
+    outlier_datapoints = detect_outlier(skd1[var])
+    rataskd = mean(skd1[var])
+    skd1[var] = skd1[var].replace(outlier_datapoints, rataskd)
     
-# print(variableskd)
+print(variableskd)
+
+# ku ambil 
+# pelatih ph
+# dan juga godlane ph
+# tapi hasilnya 
+# tetap sama saja
+# masih tetap 
+# papan bawah
+# jual tazz
+# jual tazz
+# milih jungler aura
+# dikasih jungler kelas dunia
+# milih jungler papan bawah
 
