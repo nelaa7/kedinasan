@@ -19,10 +19,7 @@ print(data_merge)
 kedinasan = data_merge.loc[:, ['lokasi.formasi','formasi.d3st', 'pendaftar.d3st','formasi.d4st',
                                'pendaftar.d4st','formasi.d4ks','pendaftar.d4ks','no.peserta', 'skd.twk',
                                'skd.tiu', 'skd.tkp', 'skd.total', 't1.ket', 'no.ujian', 'mtk.nilai', 't2.ket']]
-
-kedinasan['lokasi.formasi'] = pd.to_numeric(kedinasan['lokasi.formasi'], errors='coerce')
-kedinasan['mtk.nilai'] = pd.to_numeric(kedinasan['mtk.nilai'], errors='coerce')
-
+ 
 
 print(kedinasan.head())
 
@@ -36,6 +33,22 @@ print("================================================")
 # outlier formasi
 print("deteksi outlier formasi")
 print("================================================")
+
+# delete data missing value
+print("Penanganan Missing Value")
+data_cleaned = kedinasan.dropna()
+print("Data tanpa missing value")
+print(data_cleaned)
+
+#ganti missing value dgn mean
+ print("Penanganan Missing Value 2")
+data1['blood_glucose_random'].fillna(data1['blood_glucose_random'].mean(), inplace=True)
+data1['blood_urea'].fillna(data1['blood_urea'].mean(), inplace=True)
+data1['serum_creatinine'].fillna(data1['serum_creatinine'].mean(), inplace=True)
+print("Missing data pada blood glucose =", data1['blood_glucose_random'].isna().sum())
+print("Missing data pada blood urea =", data1['blood_urea'].isna().sum())
+print("Missing data pada serum creatinine =", data1['serum_creatinine'].isna().sum())
+
 
 outliers = []
 
@@ -75,10 +88,10 @@ print("outlier kolom formasi.d4ks : ", outliers5)
 print("total outlier formasi.d4ks : ", len(outliers5))
 print()
 
-# outliers6= detect_outlier(kedinasan['no.peserta'])
-# print("outlier kolom no peserta : ", outliers6)
-# print("total outlier no peserta : ", len(outliers6))
-# print()
+outliers6= detect_outlier(kedinasan['no.peserta'])
+print("outlier kolom no peserta : ", outliers6)
+print("total outlier no peserta : ", len(outliers6))
+print()
 
 outliersskd2= detect_outlier(kedinasan['skd.twk'])
 print("outlier kolom skd.twk : ", outliersskd2)
