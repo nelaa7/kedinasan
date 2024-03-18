@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 
-mtk = pd.read_excel("3-mtkrev.xlsx")
+mtk = pd.read_excel("3-mtkrevv.xlsx")
 print(mtk.head)
 
 print("tabel nilai mtk")

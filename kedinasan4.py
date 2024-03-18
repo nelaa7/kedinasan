@@ -9,7 +9,7 @@ from sklearn import preprocessing
 from sklearn import utils
 from sklearn.svm import SVR
 
-skd = pd.read_excel("2-skdrev.xlsx")
+skd = pd.read_excel("2-skdrevv.xlsx")
 print(skd.head)
 
 print("tabel nilai skd")
@@ -116,9 +116,9 @@ print("============================================================")
 print()
 
 # Pemodelan SVM
-svr_model = SVR()
-svr_model.fit(x_train, y_train)
-y_pred_svm = svr_model.predict(x_test)
+svm_model = SVR()
+svm_model.fit(x_train, y_train)
+y_pred_svm = svm_model.predict(x_test)
 print("Hasil prediksi SVM".center(75, "="))
 print(y_pred_svm)
 print("============================================================")
@@ -138,7 +138,7 @@ input_skd_tkp = float(input("Masukkan nilai skd tkp: "))
 input_data = [[ input_skd_twk, input_skd_tiu, input_skd_tkp]]
 
 # Prediksi output menggunakan model yang sudah dilatih
-hasil_prediksi = svr_model.predict(input_data)
+hasil_prediksi = svm_model.predict(input_data)
 
 # Tampilkan hasil prediksi kepada pengguna
 print("Hasil prediksi untuk input yang diberikan:")
